@@ -21,25 +21,8 @@ set(BUILD_GAMES OFF CACHE BOOL "" FORCE)
 
 FetchContent_MakeAvailable(raylib)
 
-# Source files
-set(SOURCES
-    src/main.cpp
-    src/game.cpp
-    src/block.cpp
-    src/tower.cpp
-    src/scorehistory.cpp
-)
-
-# Header files (for IDE support)
-set(HEADERS
-    src/game.h
-    src/block.h
-    src/tower.h
-    src/scorehistory.h
-)
-
-# Create executable
-add_executable(TowerBuilder ${SOURCES} ${HEADERS})
+# Source files - Single file implementation
+add_executable(TowerBuilder src/game.cpp)
 
 # Link raylib
 target_link_libraries(TowerBuilder PRIVATE raylib)

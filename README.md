@@ -15,7 +15,7 @@ Tower Builder is a simple yet addictive stacking game where blocks move horizont
 ## 📚 Data Structures Implemented
 
 ### 1. **STACK** - Tower Management
-**File**: `tower.h`, `tower.cpp`
+**Implementation**: Lines 75-145 in `src/game.cpp`
 
 The tower of blocks is implemented using a **Stack** data structure.
 
@@ -42,7 +42,7 @@ std::stack<Block> towerStack;
 - Expression evaluation
 
 ### 2. **QUEUE** - Upcoming Blocks Preview
-**File**: `game.h`, `game.cpp`
+**Implementation**: Lines 260-322 in `src/game.cpp`
 
 Upcoming blocks are pre-generated and stored in a **Queue**.
 
@@ -67,7 +67,7 @@ std::queue<Block> blockQueue;
 - Request handling in web servers
 
 ### 3. **LINKED LIST** - Score History
-**File**: `scorehistory.h`, `scorehistory.cpp`
+**Implementation**: Lines 150-245 in `src/game.cpp`
 
 Game scores are tracked using a custom **Singly Linked List**.
 
@@ -135,11 +135,9 @@ struct ScoreNode {
 ```
 TowerBuilder/
 ├── src/
-│   ├── main.cpp              # Entry point and game loop
-│   ├── game.h / game.cpp     # Game logic and main controller
-│   ├── block.h / block.cpp   # Block structure and behavior
-│   ├── tower.h / tower.cpp   # Tower class (STACK)
-│   └── scorehistory.h/.cpp   # Score tracking (LINKED LIST)
+│   └── game.cpp              # Single-file implementation (all code)
+│                              # Contains: Block, Tower (STACK),
+│                              # ScoreHistory (LINKED LIST), Game, main()
 ├── assets/
 │   ├── sprites/              # Block textures (optional)
 │   ├── sounds/               # Sound effects (optional)
@@ -148,11 +146,13 @@ TowerBuilder/
 └── README.md                 # This file
 ```
 
+**Single-File Design**: All code is contained in one `game.cpp` file (~570 lines) for simplicity and ease of understanding. Perfect for learning!
+
 ### Code Statistics
-- **Total Lines**: ~800 lines
-- **Source Files**: 5
-- **Header Files**: 4
+- **Total Lines**: ~570 lines
+- **Source Files**: 1 (game.cpp)
 - **Data Structures**: 3 (Stack, Queue, Linked List)
+- **Classes**: 3 (Block, Tower, ScoreHistory, Game)
 
 ## 🚀 Building and Running
 
@@ -267,7 +267,7 @@ Want to add more features? Here are some ideas:
 
 ### Stack Usage Example
 ```cpp
-// tower.cpp
+// From game.cpp - Tower class
 void Tower::Push(const Block& block) {
     towerStack.push(block);  // O(1) - Add to top
     height++;
@@ -280,7 +280,7 @@ const Block& Tower::Top() const {
 
 ### Queue Usage Example
 ```cpp
-// game.cpp
+// From game.cpp - Game class
 void Game::SpawnNextBlock() {
     currentBlock = blockQueue.front();  // FIFO: Get first
     blockQueue.pop();                   // Remove from queue
@@ -290,7 +290,7 @@ void Game::SpawnNextBlock() {
 
 ### Linked List Usage Example
 ```cpp
-// scorehistory.cpp
+// From game.cpp - ScoreHistory class
 void ScoreHistory::AddScore(int score, int height) {
     ScoreNode* newNode = new ScoreNode(score, height);
     newNode->next = head;  // Point to old head
